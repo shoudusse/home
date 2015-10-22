@@ -1,0 +1,10 @@
+---
+- hosts: pi-gw
+  become : true
+  become_user: pi
+  vars:
+    ssh_user: syh
+
+  tasks:
+    - name: Ajout utilisateur perso
+      user: name=syh comment="Sylvain Houdusse" uid=1027 group=users groups=adm,sudo,gpio,i2c,spi
