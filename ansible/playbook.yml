@@ -1,10 +1,48 @@
 ---
 - hosts: pi-gw
-  become : true
-  become_user: pi
+  become: true
+  remote_user: pi
   vars:
     ssh_user: syh
 
   tasks:
-    - name: Ajout utilisateur perso
-      user: name=syh comment="Sylvain Houdusse" uid=1027 group=users groups=adm,sudo,gpio,i2c,spi
+    - name: Adding my own user
+      user: name={{ ssh_user }} comment="Sylvain Houdusse" uid=1027 group=users groups=adm,sudo,gpio,i2c,spi
+
+    - name: Adding my public key 
+      authorized_key: user={{ ssh_user }} key="{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+
+    - name: Disable sudo prompt password for my user
+      lineinfile:
+        dest: /etc/sudoers
+        regexp: "syh ALL=(ALL) NOPASSWD: ALL"
+        line: "syh ALL=(ALL) NOPASSWD: ALL"
+
+    - name: Disable password authentication
+      lineinfile: dest=/etc/ssh/sshd_config regexp="#PasswordAuthentication " line="PasswordAuthentication no"
+      notify: Restart ssh
+
+    - name: Disable locales env propagation
+      lineinfile: dest=/etc/ssh/sshd_config regexp="AcceptEnv LANG LC_*" line="#AcceptEnv LANG LC_*"
+      notify: Restart ssh
+
+    - name: Install utils packages
+      apt:
+        name={{ item }} update_cache=yes cache_valid_time=3600
+      with_items:
+        - tcpdump
+        - dnsutils
+        - python-dev
+
+    - name: Install utils python packages
+      pip: name={{ item }}
+      with_items:
+        - Glances
+
+
+    - name: Install dnsmasq
+      apt: name=dnsmasq update_cache=yes cache_valid_time=3600
+
+  handlers:
+    - name: Restart ssh
+      service: name=ssh state=restarted
