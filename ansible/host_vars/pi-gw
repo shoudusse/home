@@ -1,0 +1,53 @@
+hostname: pi-gw
+ssh_user: syh
+static_ip: 10.27.0.100/24
+static_gatewway: 10.27.0.1
+static_routes:
+  - dest: 10.8.0.0/24
+    gw: 10.27.0.2
+  - dest: 172.16.0.0/12
+    gw: 10.27.0.2
+
+dns_hosts:
+  - ip: 10.27.0.1
+    name: dlinkrouter
+    mac: 6C:19:8F:CC:2E:FB
+
+  - ip: 10.27.0.2
+    name: nas
+    mac:
+
+  #- ip: 10.27.0.3
+  #  name: nas
+
+  - ip: 10.27.0.4
+    name: nest
+    mac:
+
+  - ip: 10.27.0.5
+    name: pioneer
+    mac:
+
+  - ip: 10.27.0.6
+    name: ipcam
+    mac:
+
+  - ip: 10.27.0.7
+    name: squeezebox
+    mac:
+
+  - ip: 10.27.0.8
+    name: imprimante
+    mac:
+
+  - ip: 10.27.0.9
+    name: ipcam-wifi
+    mac:
+
+  - ip: 10.27.0.10
+    name: macsly
+    mac:
+
+  - ip: 10.27.0.100
+    name: pi-gw
+    mac:

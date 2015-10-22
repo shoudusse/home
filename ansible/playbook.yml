@@ -3,23 +3,53 @@
   become: true
   remote_user: pi
   vars:
-    ssh_user: syh
+    
 
   tasks:
+    - name: Setting hostname (1/2)
+      hostname: name={{ hostname }}
+
+    - name: Setting hostname (2/2)
+      lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="127.0.1.1       {{ hostname }}"
+
+    - name: Setting motd
+      copy: src=files/motd dest=/etc/motd owner=root group=root mode=644
+
+    - name: Setting static ip configuration
+      lineinfile:
+        dest: /etc/dhcpcd.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - regexp: interface eth0
+          line: interface eth0
+        - regexp: static ip_address={{ static_ip}}
+          line: static ip_address={{ static_ip }}
+        - regexp: static routers={{ static_gatewway }}
+          line: static routers={{ static_gatewway }}
+
+    - name: Setting static routes
+      template:
+        src: templates/40-vpnroute.j2
+        dest: /lib/dhcpcd/dhcpcd-hooks/40-vpnroute
+
     - name: Adding my own user
       user: name={{ ssh_user }} comment="Sylvain Houdusse" uid=1027 group=users groups=adm,sudo,gpio,i2c,spi
 
-    - name: Adding my public key 
-      authorized_key: user={{ ssh_user }} key="{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+    - name: Adding my public key
+      authorized_key:
+        user: "{{ ssh_user }}"
+        key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
+        # key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
 
     - name: Disable sudo prompt password for my user
       lineinfile:
         dest: /etc/sudoers
-        regexp: "syh ALL=(ALL) NOPASSWD: ALL"
+        regexp: "^syh "
         line: "syh ALL=(ALL) NOPASSWD: ALL"
 
     - name: Disable password authentication
-      lineinfile: dest=/etc/ssh/sshd_config regexp="#PasswordAuthentication " line="PasswordAuthentication no"
+      lineinfile: dest=/etc/ssh/sshd_config regexp="PasswordAuthentication " line="PasswordAuthentication no"
       notify: Restart ssh
 
     - name: Disable locales env propagation
@@ -31,8 +61,10 @@
         name={{ item }} update_cache=yes cache_valid_time=3600
       with_items:
         - tcpdump
+        - nmap
         - dnsutils
         - python-dev
+        - locate
 
     - name: Install utils python packages
       pip: name={{ item }}
@@ -42,6 +74,40 @@
     - name: Install dnsmasq
       apt: name=dnsmasq update_cache=yes cache_valid_time=3600
 
+    - name: Create dnsmasq configuration dir
+      file: path=/var/lib/dnsmasq state=directory
+
+    - name: Configure dnsmasq hosts
+      template:
+        src: templates/home.hosts.j2
+        dest: /var/lib/dnsmasq/home.hosts
+      notify: Restart dnsmasq
+
+    - name: Configure dnsmasq dhcp
+      template:
+        src: templates/home.dhcp.j2
+        dest: /var/lib/dnsmasq/home.dhcp
+      notify: Restart dnsmasq
+
+    - name: Configure dnsmasq
+      lineinfile:
+        dest: /etc/dnsmasq.conf
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - regexp: "no-hosts"
+          line: no-hosts
+        - regexp: "^addn-hosts="
+          line: addn-hosts=/var/lib/dnsmasq/home.hosts
+        - regexp: "^dhcp-hostsfile="
+          line: dhcp-hostsfile=/var/lib/dnsmasq/home.dhcp
+      notify: Restart dnsmasq
+
+    - name: Install openvpn
+      apt: name=openvpn update_cache=yes cache_valid_time=3600
+
   handlers:
     - name: Restart ssh
       service: name=ssh state=restarted
+    - name: Restart dnsmasq
+      service: name=dnsmasq state=restarted

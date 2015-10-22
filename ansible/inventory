@@ -1,1 +1,1 @@
-pi-gw ansible_ssh_host=10.27.0.242
+pi-gw ansible_ssh_host=10.27.0.100
