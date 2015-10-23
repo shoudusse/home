@@ -89,21 +89,19 @@
         dest: /var/lib/dnsmasq/home.dhcp
       notify: Restart dnsmasq
 
-    - name: Configure dnsmasq
+    - name: Configure dnsmasq (1/2)
+      copy:
+        src: files/dnsmasq.conf.j2
+        dest: /etc/dnsmasq.d/home.conf
+        owner: root
+        mode: 644
+      notify: Restart dnsmasq
+
+    - name: Configure dnsmasq (2/2)
       lineinfile:
         dest: /etc/dnsmasq.conf
-        regexp: "{{ item.regexp }}"
-        line: "{{ item.line }}"
-      with_items:
-        - regexp: "no-hosts"
-          line: no-hosts
-        - regexp: "^addn-hosts="
-          line: addn-hosts=/var/lib/dnsmasq/home.hosts
-        - regexp: "^dhcp-hostsfile="
-          line: dhcp-hostsfile=/var/lib/dnsmasq/home.dhcp
-        - regexp: "^dhcp-range="
-          line: "dhcp-range={{ dhcp.pool_start }},{{ dhcp.pool_end}},{{ dhcp.lease}}"
-      notify: Restart dnsmasq
+        regexp: "conf-dir="
+        line: "conf-dir=/etc/dnsmasq.d/*.conf"
 
     - name: Install openvpn
       apt: name=openvpn update_cache=yes cache_valid_time=3600
