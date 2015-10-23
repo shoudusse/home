@@ -19,39 +19,39 @@ dns_hosts:
 
   - ip: 10.27.0.2
     name: nas
-    mac:
+    mac: 00:08:9B:C8:47:4C
 
   #- ip: 10.27.0.3
   #  name: nas
 
   - ip: 10.27.0.4
     name: nest
-    mac:
+    mac: 18:B4:30:26:02:77
 
   - ip: 10.27.0.5
     name: pioneer
-    mac:
+    mac: 3C:BD:D8:2E:96:C8
 
   - ip: 10.27.0.6
     name: ipcam
-    mac:
+    mac: 00:0D:C5:D9:06:E2
 
   - ip: 10.27.0.7
     name: squeezebox
-    mac:
+    mac: 00:04:20:28:50:85
 
   - ip: 10.27.0.8
     name: imprimante
-    mac:
+    mac: 3C:4A:92:B1:23:3F
 
   - ip: 10.27.0.9
     name: ipcam-wifi
-    mac:
+    mac: 48:02:2A:47:84:58
 
   - ip: 10.27.0.10
     name: macsly
-    mac:
+    mac: 20:C9:D0:45:F2:57
 
   - ip: 10.27.0.100
     name: pi-gw
-    mac:
+    mac: B8:27:EB:15:E5:A0
