@@ -39,8 +39,8 @@
     - name: Adding my public key
       authorized_key:
         user: "{{ ssh_user }}"
-        key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
-        # key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+        #key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
 
     - name: Disable sudo prompt password for my user
       lineinfile:
@@ -101,6 +101,8 @@
           line: addn-hosts=/var/lib/dnsmasq/home.hosts
         - regexp: "^dhcp-hostsfile="
           line: dhcp-hostsfile=/var/lib/dnsmasq/home.dhcp
+        - regexp: "^dhcp-range="
+          line: "dhcp-range={{ dhcp.pool_start }},{{ dhcp.pool_end}},{{ dhcp.lease}}"
       notify: Restart dnsmasq
 
     - name: Install openvpn

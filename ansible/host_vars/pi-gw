@@ -7,6 +7,10 @@ static_routes:
     gw: 10.27.0.2
   - dest: 172.16.0.0/12
     gw: 10.27.0.2
+dhcp:
+  pool_start: 10.27.0.128
+  pool_end: 10.27.0.253
+  lease: 12h
 
 dns_hosts:
   - ip: 10.27.0.1
