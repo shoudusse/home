@@ -2,8 +2,6 @@
 - hosts: pi-gw
   become: true
   remote_user: pi
-  vars:
-    
 
   tasks:
     - name: Setting hostname (1/2)
@@ -56,9 +54,19 @@
       lineinfile: dest=/etc/ssh/sshd_config regexp="AcceptEnv LANG LC_*" line="#AcceptEnv LANG LC_*"
       notify: Restart ssh
 
+    - name: Set timezone variables
+      copy:
+        content: 'Europe/Paris'
+        dest: /etc/timezone
+        owner: root
+        group: root
+        mode: 0644
+        backup: yes
+      notify:
+        - Update timezone
+
     - name: Install utils packages
-      apt:
-        name={{ item }} update_cache=yes cache_valid_time=3600
+      apt: name={{ item }} update_cache=yes cache_valid_time=3600
       with_items:
         - tcpdump
         - nmap
@@ -111,3 +119,5 @@
       service: name=ssh state=restarted
     - name: Restart dnsmasq
       service: name=dnsmasq state=restarted
+    - name: Update timezone
+      command: dpkg-reconfigure --frontend noninteractive tzdata
