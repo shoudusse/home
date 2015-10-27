@@ -80,6 +80,10 @@ dns_hosts:
     name: iphone-de-daniele
     mac: 18:AF:61:D6:2E:E0
 
+  - ip: 10.27.0.36
+    name: orange-nura-sly
+    mac: 8C:99:E6:5F:8C:F4
+
   - ip: 10.27.0.50
     name: thermostat
     mac: 70:EE:50:03:24:F4
@@ -104,3 +108,5 @@ dns_hosts:
     name: chambre
     mac: D8:EB:97:1B:E2:8B
 
+  - ip: 10.8.0.14
+    name: partoo.priv

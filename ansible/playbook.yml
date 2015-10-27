@@ -11,7 +11,7 @@
       lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="127.0.1.1       {{ hostname }}"
 
     - name: Setting motd
-      copy: src=files/motd dest=/etc/motd owner=root group=root mode=644
+      copy: src=files/motd dest=/etc/motd owner=root group=root mode='0644'
 
     - name: Setting static ip configuration
       lineinfile:
@@ -60,7 +60,7 @@
         dest: /etc/timezone
         owner: root
         group: root
-        mode: 0644
+        mode: '0644'
         backup: yes
       notify:
         - Update timezone
@@ -69,6 +69,7 @@
       apt: name={{ item }} update_cache=yes cache_valid_time=3600
       with_items:
         - tcpdump
+        - tcptrack
         - nmap
         - dnsutils
         - python-dev
@@ -102,14 +103,14 @@
         src: files/dnsmasq.conf.j2
         dest: /etc/dnsmasq.d/home.conf
         owner: root
-        mode: 644
+        mode: '0644'
       notify: Restart dnsmasq
 
     - name: Configure dnsmasq (2/2)
       lineinfile:
         dest: /etc/dnsmasq.conf
         regexp: "conf-dir="
-        line: "conf-dir=/etc/dnsmasq.d/*.conf"
+        line: "conf-dir=/etc/dnsmasq.d,*.conf"
 
     - name: Install openvpn
       apt: name=openvpn update_cache=yes cache_valid_time=3600

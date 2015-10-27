@@ -1,3 +1,5 @@
 {% for host in dns_hosts %}
+{% if host.mac is defined %}
 {{host.mac}},{{ host.name }},{{ host.ip }}
+{% endif %}
 {% endfor %}
