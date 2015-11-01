@@ -112,6 +112,19 @@
         regexp: "conf-dir="
         line: "conf-dir=/etc/dnsmasq.d,*.conf"
 
+    - name: Configure dnsmasq log rotation
+      copy:
+        src: files/dnsmasq-logrotate.conf
+        dest: /etc/logrotate.d/dnsmasq
+
+    - name: Copy dnsmasq stats script
+      copy:
+        src: files/get-dnsmasq-stats.sh
+        dest: /home/syh
+        owner: syh
+        group: users
+        mode: 0700
+
     - name: Install openvpn
       apt: name=openvpn update_cache=yes cache_valid_time=3600
 
