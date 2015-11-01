@@ -42,7 +42,7 @@ dns_hosts:
 
   - ip: 10.27.0.8
     name: imprimante
-    mac: 3C:4A:92:B1:23:3F
+    mac: 30:CD:A7:32:8A:57
 
   - ip: 10.27.0.9
     name: ipcam-wifi
