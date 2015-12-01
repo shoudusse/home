@@ -96,6 +96,10 @@ dns_hosts:
     name: balance
     mac: 00:24:E4:28:01:26
 
+  - ip: 10.27.0.53
+    name: nest-cam
+    mac: 18:B4:30:4E:AC:BD
+
   - ip: 10.27.0.100
     name: pi-gw
     mac: B8:27:EB:15:E5:A0
