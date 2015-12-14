@@ -25,7 +25,7 @@ dns_hosts:
   #  name: nas
 
   - ip: 10.27.0.4
-    name: nest
+    name: nest-cam
     mac: 18:B4:30:26:02:77
 
   - ip: 10.27.0.5
