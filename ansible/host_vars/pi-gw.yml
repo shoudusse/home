@@ -68,10 +68,14 @@ dns_hosts:
     name: iphone-de-soso
     mac: 7C:01:91:5C:AF:EB
 
-  - ip: 10.27.0.33
-    name: iphone-de-sly
+  - ip: 10.27.0.37
+    name: iphone-de-marie
     mac: C8:85:50:9F:2E:7C
 
+  - ip: 10.27.0.33
+    name: iphone-de-sly
+    mac: 2C:33:61:A1:87:1E
+    
   - ip: 10.27.0.34
     name: kindle-de-sly
     mac: 10:AE:60:AB:B5:5D
