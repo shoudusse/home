@@ -6,11 +6,14 @@ domain-needed
 bogus-priv
 filterwin2k
 server=/.adml/172.19.0.1
+server=/consul/10.27.0.101#8600
 expand-hosts
 no-hosts
 domain=home
 domain=home,10.27.0.0/24
 domain=priv,10.8.0.0/24
+address=/.apps.slyweb.org/10.27.0.101
+dhcp-script=/var/lib/dnsmasq/dhcp-dash-hue.py
 
 dhcp-option=option:router,10.27.0.1
 dhcp-option=option:dns-server,10.27.0.100
@@ -20,3 +23,4 @@ dhcp-option=option:log-server,10.27.0.2
 dhcp-option=121,10.8.0.0/24,10.27.0.2,172.16.0.0/12,10.27.0.2
 cache-size=1000
 log-facility=/var/log/dnsmasq.log
+interface=eth0
