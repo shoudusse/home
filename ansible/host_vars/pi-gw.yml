@@ -1,7 +1,7 @@
 hostname: pi-gw
 ssh_user: syh
 static_ip: 10.27.0.100/24
-static_gatewway: 10.27.0.1
+static_gateway: 10.27.0.1
 static_routes:
   - dest: 10.8.0.0/24
     gw: 10.27.0.2

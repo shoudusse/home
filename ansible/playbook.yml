@@ -23,8 +23,8 @@
           line: interface eth0
         - regexp: static ip_address={{ static_ip}}
           line: static ip_address={{ static_ip }}
-        - regexp: static routers={{ static_gatewway }}
-          line: static routers={{ static_gatewway }}
+        - regexp: static routers={{ static_gateway }}
+          line: static routers={{ static_gateway }}
 
     - name: Setting static routes
       template:
