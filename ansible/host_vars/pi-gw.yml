@@ -75,7 +75,7 @@ dns_hosts:
   - ip: 10.27.0.33
     name: iphone-de-sly
     mac: 2C:33:61:A1:87:1E
-    
+
   - ip: 10.27.0.34
     name: kindle-de-sly
     mac: 10:AE:60:AB:B5:5D
@@ -104,6 +104,10 @@ dns_hosts:
     name: nest-cam
     mac: 18:B4:30:4E:AC:BD
 
+  - ip: 10.27.0.54
+    name: Philips-hue
+    mac: 00:17:88:2A:E7:76
+
   - ip: 10.27.0.100
     name: pi-gw
     mac: B8:27:EB:15:E5:A0
@@ -118,3 +122,15 @@ dns_hosts:
 
   - ip: 10.8.0.14
     name: partoo.priv
+
+  - ip: 10.8.0.1
+    name: gonzo.priv
+
+  - ip: 10.8.0.50
+    name: elk.priv
+
+  - ip: 10.8.0.54
+    name: pasteque.escale-biere.com
+
+  - ip: 10.27.0.10
+    name: dev.escale-biere.com
