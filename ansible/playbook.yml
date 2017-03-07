@@ -37,8 +37,8 @@
     - name: Adding my public key
       authorized_key:
         user: "{{ ssh_user }}"
-        #key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
-        key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
+        #key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
 
     - name: Disable sudo prompt password for my user
       lineinfile:
