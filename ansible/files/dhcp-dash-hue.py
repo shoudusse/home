@@ -16,10 +16,8 @@ def main(argv):
 
   action = argv[1]
   mac = argv[2]
-  ip = argv[3]
-  hostname = argv[4]
 
-  if action != 'add':
+  if action not in ['add', 'old']:
     sys.exit(0)
 
   if mac != kleenex_dash:
