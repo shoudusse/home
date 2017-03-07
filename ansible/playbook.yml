@@ -122,6 +122,8 @@
         src: dhcp-dash-hue.py
         dest: /var/lib/dnsmasq/dhcp-dash-hue.py
         mode: 0755
+      tags:
+        - dhcp-dash-hue
 
     - name: Configure dnsmasq log rotation
       copy:
