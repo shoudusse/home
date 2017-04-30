@@ -108,6 +108,10 @@ dns_hosts:
     name: Philips-hue
     mac: 00:17:88:2A:E7:76
 
+  - ip: 10.27.0.55
+    name: lametric
+    mac: A0:2C:36:76:FE:28
+
   - ip: 10.27.0.100
     name: pi-gw
     mac: B8:27:EB:15:E5:A0
