@@ -37,8 +37,8 @@
     - name: Adding my public key
       authorized_key:
         user: "{{ ssh_user }}"
-        key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
-        #key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+        #key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
 
     - name: Disable sudo prompt password for my user
       lineinfile:
@@ -84,6 +84,7 @@
       with_items:
         - Glances
         - qhue
+        - requests
 
     - name: Install dnsmasq
       apt: name=dnsmasq update_cache=yes cache_valid_time=3600
@@ -124,6 +125,12 @@
         mode: 0755
       tags:
         - dhcp-dash-hue
+
+    - name: Add dnsmasq script for LaMetric notification
+      copy:
+        src: tcl-lametric.py
+        dest: /var/lib/dnsmasq/tcl-lametric.py
+        mode: 0755
 
     - name: Configure dnsmasq log rotation
       copy:
