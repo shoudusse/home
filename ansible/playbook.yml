@@ -97,12 +97,16 @@
         src: templates/home.hosts.j2
         dest: /var/lib/dnsmasq/home.hosts
       notify: Restart dnsmasq
+      tags:
+        - dns-dhcp-conf
 
     - name: Configure dnsmasq dhcp
       template:
         src: templates/home.dhcp.j2
         dest: /var/lib/dnsmasq/home.dhcp
       notify: Restart dnsmasq
+      tags:
+        - dns-dhcp-conf
 
     - name: Configure dnsmasq (1/2)
       copy:
