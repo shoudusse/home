@@ -34,11 +34,11 @@
     - name: Adding my own user
       user: name={{ ssh_user }} comment="Sylvain Houdusse" uid=1027 group=users groups=adm,sudo,gpio,i2c,spi
 
-    - name: Adding my public key
-      authorized_key:
-        user: "{{ ssh_user }}"
-        #key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
-        key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
+    # - name: Adding my public key
+    #   authorized_key:
+    #     user: "{{ ssh_user }}"
+    #     #key: "{{ lookup('file', '/home/syh/.ssh/id_rsa.pub') }}"
+    #     key: "{{ lookup('file', '/Users/syh/.ssh/id_rsa.pub') }}"
 
     - name: Disable sudo prompt password for my user
       lineinfile:
