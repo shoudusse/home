@@ -138,3 +138,12 @@ dns_hosts:
 
   - ip: 10.27.0.10
     name: dev.escale-biere.com
+
+  - ip: 193.253.85.230
+    name: peer-fibre
+
+  - ip: 90.84.45.142
+    name: flexible-engine-eip-eu-west-0a
+
+  - ip: 192.168.1.1
+    name: livebox
