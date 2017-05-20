@@ -136,7 +136,7 @@ dns_hosts:
   - ip: 10.8.0.54
     name: pasteque.escale-biere.com
 
-  - ip: 10.27.0.10
+  - ip: 192.168.0.8
     name: dev.escale-biere.com
 
   - ip: 193.253.85.230
