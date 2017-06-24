@@ -1,12 +1,13 @@
 hostname: pi-gw
 ssh_user: syh
 static_ip: 10.27.0.100/24
+vpn_gateway: 10.27.0.101
 static_gateway: 10.27.0.1
 static_routes:
   - dest: 10.8.0.0/24
-    gw: 10.27.0.2
+    gw: "{{ vpn_gateway }}"
   - dest: 172.16.0.0/12
-    gw: 10.27.0.2
+    gw: "{{ vpn_gateway }}"
 dhcp:
   pool_start: 10.27.0.128
   pool_end: 10.27.0.253
