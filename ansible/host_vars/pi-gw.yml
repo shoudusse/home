@@ -4,7 +4,7 @@ static_ip: 10.27.0.100/24
 vpn_gateway: 10.27.0.101
 static_gateway: 10.27.0.1
 static_routes:
-  - dest: 10.8.0.0/24
+  - dest: 10.0.0.0/8
     gw: "{{ vpn_gateway }}"
   - dest: 172.16.0.0/12
     gw: "{{ vpn_gateway }}"
