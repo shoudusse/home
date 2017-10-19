@@ -152,3 +152,6 @@ dns_hosts:
 
   - ip: 192.168.1.1
     name: livebox
+
+  - ip: 10.27.0.101
+    name: grafana.slyweb.org
